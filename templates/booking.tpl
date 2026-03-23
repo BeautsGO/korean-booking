@@ -1,5 +1,7 @@
 {title}
 
+{direct_link}
+
 {channel_ios}
 
 {channel_android}
