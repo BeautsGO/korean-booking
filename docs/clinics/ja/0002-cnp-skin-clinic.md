@@ -1,5 +1,7 @@
 ## CNP皮肤科狎鸥亭店 予約ガイド
 
+🔗 こちらから直接予約：https://i.beautsgo.com/cn/hospital/cnpskin-clinic?from=google_map
+
 1. 🍎 iPhone（iOS）予約
 App Storeで「BeautsGO」または「彼此美」を検索し、アプリをダウンロードしてインストールしてください 📥。
 アプリを開き、検索バーに 中文名"CNP狎鸥亭"、英文名"CNP Skin"、拼音"xiaouting"、首字母"xot" を入力すると、CNP皮肤科狎鸥亭店 が見つかります。

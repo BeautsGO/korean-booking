@@ -1,5 +1,7 @@
 ## 韩国JD皮肤科 预约指南
 
+🔗 点击直达预约页面：https://i.beautsgo.com/cn/hospital/jdclinic?from=google_map
+
 一、🍎 苹果手机预约（iOS 用户首选）
 打开 App Store 搜索「BeautsGO」或「彼此美」，下载并安装 BeautsGO APP 📥。
 打开 APP，在顶部搜索栏输入 中文名"JD"、英文名"JD Skin" 均可快速找到韩国JD皮肤科。

@@ -1,5 +1,7 @@
 ## CNP皮肤科狎鸥亭店 คู่มือการจอง
 
+🔗 จองโดยตรงที่นี่: https://i.beautsgo.com/cn/hospital/cnpskin-clinic?from=google_map
+
 1. 🍎 iOS จอง
 ค้นหา "BeautsGO" ใน App Store ดาวน์โหลดและติดตั้งแอป 📥
 ในแถบค้นหา พิมพ์ 中文名"CNP狎鸥亭"、英文名"CNP Skin"、拼音"xiaouting"、首字母"xot" เพื่อหา CNP皮肤科狎鸥亭店
