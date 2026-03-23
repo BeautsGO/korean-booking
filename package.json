@@ -1,6 +1,6 @@
 {
-  "name": "booking-skill",
-  "version": "2.0.0",
+  "name": "korean-booking",
+  "version": "2.1.0",
   "main": "api/skill.js",
   "scripts": {
     "test": "jest",
