@@ -1,6 +1,6 @@
 ## CNP皮肤科狎鸥亭店 Booking Guide
 
-🔗 Book directly here: https://i.beautsgo.com/cn/hospital/cnpskin-clinic?from=google_map
+🔗 Book directly here: https://i.beautsgo.com/cn/hospital/cnpskin-clinic?from=skill
 
 1. 🍎 iOS Booking
 Search "BeautsGO" on the App Store, download and install the app 📥.

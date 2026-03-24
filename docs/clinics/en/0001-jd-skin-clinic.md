@@ -1,6 +1,6 @@
 ## 韩国JD皮肤科 Booking Guide
 
-🔗 Book directly here: https://i.beautsgo.com/cn/hospital/jdclinic?from=google_map
+🔗 Book directly here: https://i.beautsgo.com/cn/hospital/jdclinic?from=skill
 
 1. 🍎 iOS Booking
 Search "BeautsGO" on the App Store, download and install the app 📥.
