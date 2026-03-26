@@ -163,29 +163,29 @@ async function clickBookingButton(url) {
     browser = result.browser
     const page = result.page
 
-    await page.waitForTimeout(5000)
-
-    // 等待预约按钮出现
+    // 等待预约按钮出现（Vue 渲染通常 1~3 秒即可）
     await page.waitForSelector('.btns-right', { timeout: 10000 }).catch(() => {})
+    await page.waitForTimeout(2000)
 
-    // 策略1: DOM 直接点击
+    // 策略1: 优先 .btns-right（排除 .btns-consult，找包含"预约"文字的按钮）
     const clicked = await page.evaluate(() => {
-      // 查找"预约面诊"按钮
-      const elements = document.querySelectorAll('*')
-      let target = null
-      let minLen = Infinity
-      for (const el of elements) {
+      // 优先：.btns-right 中文本包含"预约"的元素
+      const btnsRight = document.querySelectorAll('.btns-right')
+      for (const el of btnsRight) {
         const text = (el.textContent || '').trim()
-        if ((text === '预约面诊' || text === '立即预约' || text === '预约') && el.offsetParent !== null) {
-          if (text.length < minLen) {
-            minLen = text.length
-            target = el
-          }
+        if (text.includes('预约') && el.offsetParent !== null) {
+          el.click()
+          return true
         }
       }
-      if (target) {
-        target.click()
-        return true
+      // 降级：文本包含"预约面诊"或"立即预约"的任意可见元素
+      const elements = document.querySelectorAll('*')
+      for (const el of elements) {
+        const text = (el.textContent || '').trim()
+        if ((text.includes('预约面诊') || text.includes('立即预约')) && el.offsetParent !== null && text.length < 30) {
+          el.click()
+          return true
+        }
       }
       // 备选：class 包含 book 或 reservation
       const btn = document.querySelector('[class*="book"],[class*="reservation"],[class*="appoint"]')
@@ -262,20 +262,28 @@ async function fillBookingForm(url, formData) {
 
     // 1. 等待医院页面渲染，点击"预约面诊"按钮
     console.log('[Booking Skill] 等待医院页面加载...')
-    await page.waitForTimeout(5000)
     await page.waitForSelector('.btns-right', { timeout: 10000 }).catch(() => {})
+    await page.waitForTimeout(2000)
 
     const bookClicked = await page.evaluate(() => {
-      const elements = document.querySelectorAll('*')
-      let target = null
-      let minLen = Infinity
-      for (const el of elements) {
+      // 优先：.btns-right 中文本包含"预约"的元素
+      const btnsRight = document.querySelectorAll('.btns-right')
+      for (const el of btnsRight) {
         const text = (el.textContent || '').trim()
-        if ((text === '预约面诊' || text === '立即预约' || text === '预约') && el.offsetParent !== null) {
-          if (text.length < minLen) { minLen = text.length; target = el }
+        if (text.includes('预约') && el.offsetParent !== null) {
+          el.click()
+          return true
         }
       }
-      if (target) { target.click(); return true }
+      // 降级：文本包含"预约面诊"或"立即预约"的任意可见元素（text.length < 30 避免匹配大容器）
+      const elements = document.querySelectorAll('*')
+      for (const el of elements) {
+        const text = (el.textContent || '').trim()
+        if ((text.includes('预约面诊') || text.includes('立即预约')) && el.offsetParent !== null && text.length < 30) {
+          el.click()
+          return true
+        }
+      }
       return false
     })
 
