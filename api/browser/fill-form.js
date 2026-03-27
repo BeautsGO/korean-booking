@@ -2,7 +2,7 @@
 /**
  * fill-form.js — 打开预约表单页并自动填写提交
  *
- * 用法：
+ * 用法（命令行）：
  *   node api/browser/fill-form.js <booking_url> <persons> <dateText> [contact] [timeSlot]
  *
  *   booking_url — 预约表单页 URL
@@ -11,14 +11,16 @@
  *   contact     — 联系方式（可选）
  *   timeSlot    — 时间段：全天/上午/下午（可选，默认全天）
  *
- * 退出码：
- *   0 — 提交成功
- *   2 — 部分失败（页面已打开，需手动操作）
- *   1 — 严重错误
+ * 作为模块调用时返回：
+ *   { success: true }                          — 全部完成
+ *   { success: false, step, message }          — 某步失败
  */
 
 const { createAuthorizedPage } = require('./consult')
 
+/**
+ * @returns {Promise<{ success: boolean, step?: string, message?: string }>}
+ */
 async function fillForm(bookingUrl, persons, dateText, contact, timeSlot) {
   let browser
   try {
@@ -60,6 +62,7 @@ async function fillForm(bookingUrl, persons, dateText, contact, timeSlot) {
     // ── 2. 选择预约时间 ────────────────────────────────────
     if (dateText) {
       console.log(`📅 Selecting date: ${dateText}`)
+      // 点击"选择预约时间"行，打开日历
       await page.evaluate(() => {
         for (const row of document.querySelectorAll('.flex.info.add')) {
           if (row.textContent?.includes('选择预约时间')) { row.click(); return }
@@ -67,85 +70,108 @@ async function fillForm(bookingUrl, persons, dateText, contact, timeSlot) {
       })
       await page.waitForTimeout(2000)
 
+      // 等待日历弹窗真正出现
+      await page.waitForSelector('.u-calendar, .u-popup', { timeout: 8000 }).catch(() => {})
+      await page.waitForTimeout(500)
+
       const dayMatch = dateText.match(/(\d{1,2})[日号]$/) || dateText.match(/[月\/\-](\d{1,2})/)
       const targetDay = dayMatch ? parseInt(dayMatch[1], 10) : null
 
-      if (targetDay) {
-        const dateClicked = await page.evaluate((day) => {
-          // 优先：在 .u-calendar 内找 SPAN 文本匹配的日期格子
-          const calendar = document.querySelector('.u-calendar')
-          if (calendar && calendar.offsetParent !== null) {
-            for (const span of calendar.querySelectorAll('span')) {
-              if ((span.textContent || '').trim() === String(day) && span.offsetParent !== null) {
-                span.click(); return true
-              }
-            }
-          }
-          // 降级：在所有可见 .u-popup 内找
-          for (const popup of document.querySelectorAll('.u-popup')) {
-            if (popup.offsetParent !== null) {
-              for (const el of popup.querySelectorAll('*')) {
-                if ((el.textContent || '').trim() === String(day) && el.offsetParent !== null) {
-                  el.click(); return true
-                }
-              }
-            }
-          }
-          return false
-        }, targetDay)
-
-        console.log(`📅 Date ${targetDay} clicked: ${dateClicked}`)
-        await page.waitForTimeout(1500)
-
-        const nextClicked = await page.evaluate(() => {
-          // 优先：u-calendar__confirm 按钮
-          const confirm = document.querySelector('.u-calendar__confirm')
-          if (confirm && confirm.offsetParent !== null) { confirm.click(); return true }
-          // 降级：文本匹配
-          for (const el of document.querySelectorAll('*')) {
-            const text = (el.textContent || '').trim()
-            if ((text === '下一步' || text === '确定' || text === '完成') && el.offsetParent !== null) {
-              el.click(); return true
-            }
-          }
-          return false
-        })
-        console.log(`⏭️  Next button clicked: ${nextClicked}`)
-        await page.waitForTimeout(1500)
-
-        // ── 2b. 选择时间段（全天/上午/下午）────────────────────
-        // 点完"下一步"后会出现时间段弹窗（全天 / 上午 / 下午）
-        const slotMap = { '上午': ['上午', 'AM', 'morning'], '下午': ['下午', 'PM', 'afternoon'], '全天': ['全天', '不限', 'all day'] }
-        // 默认选"全天"，用户可指定
-        const preferredSlot = timeSlot || '全天'
-        const slotKeywords = slotMap[preferredSlot] || slotMap['全天']
-
-        console.log(`🕐 Selecting time slot: ${preferredSlot}`)
-        const slotClicked = await page.evaluate((keywords) => {
-          // 在可见的弹窗/列表中查找时间段文本
-          for (const kw of keywords) {
-            for (const el of document.querySelectorAll('*')) {
-              if ((el.textContent || '').trim() === kw && el.offsetParent !== null) {
-                el.click(); return kw
-              }
-            }
-          }
-          return null
-        }, slotKeywords)
-        console.log(`🕐 Time slot clicked: ${slotClicked}`)
-        await page.waitForTimeout(1000)
-
-        // 点"确认"按钮关闭时间段弹窗
-        const confirmClicked = await page.evaluate(() => {
-          for (const el of document.querySelectorAll('*')) {
-            const text = (el.textContent || '').trim()
-            if (text === '确认' && el.offsetParent !== null) { el.click(); return true }
-          }
-          return false
-        })
-        console.log(`✅ Time confirm clicked: ${confirmClicked}`)
-        await page.waitForTimeout(1000)
+      if (!targetDay) {
+        await browser.close()
+        return { success: false, step: 'date_parse', message: `无法从"${dateText}"解析出日期数字` }
       }
+
+      // 2a. 点击日期格子
+      const dateClicked = await page.evaluate((day) => {
+        // 优先：在 .u-calendar 内找 SPAN 文本匹配的日期格子
+        const calendar = document.querySelector('.u-calendar')
+        if (calendar && calendar.offsetParent !== null) {
+          for (const span of calendar.querySelectorAll('span')) {
+            if ((span.textContent || '').trim() === String(day) && span.offsetParent !== null) {
+              span.click(); return true
+            }
+          }
+        }
+        // 降级：在所有可见 .u-popup 内找
+        for (const popup of document.querySelectorAll('.u-popup')) {
+          if (popup.offsetParent !== null) {
+            for (const el of popup.querySelectorAll('*')) {
+              if ((el.textContent || '').trim() === String(day) && el.offsetParent !== null) {
+                el.click(); return true
+              }
+            }
+          }
+        }
+        return false
+      }, targetDay)
+
+      console.log(`📅 Date ${targetDay} clicked: ${dateClicked}`)
+
+      // ⚠️ 日期选择失败 → 提前返回错误，不继续走后面步骤
+      if (!dateClicked) {
+        await browser.close()
+        return { success: false, step: 'date_click', message: `日历中未找到 ${targetDay} 号，可能该日期不可预约或日历尚未加载` }
+      }
+
+      await page.waitForTimeout(1500)
+
+      // 2b. 点"下一步"
+      const nextClicked = await page.evaluate(() => {
+        // 优先：u-calendar__confirm 按钮
+        const confirm = document.querySelector('.u-calendar__confirm')
+        if (confirm && confirm.offsetParent !== null) { confirm.click(); return true }
+        // 降级：文本匹配
+        for (const el of document.querySelectorAll('*')) {
+          const text = (el.textContent || '').trim()
+          if ((text === '下一步' || text === '确定' || text === '完成') && el.offsetParent !== null) {
+            el.click(); return true
+          }
+        }
+        return false
+      })
+      console.log(`⏭️  Next button clicked: ${nextClicked}`)
+
+      if (!nextClicked) {
+        await browser.close()
+        return { success: false, step: 'date_next', message: '日历"下一步"按钮未找到' }
+      }
+
+      await page.waitForTimeout(1500)
+
+      // 2c. 选择时间段（全天/上午/下午）
+      const slotMap = {
+        '上午': ['上午', 'AM', 'morning'],
+        '下午': ['下午', 'PM', 'afternoon'],
+        '全天': ['全天', '不限', 'all day']
+      }
+      const preferredSlot = timeSlot || '全天'
+      const slotKeywords = slotMap[preferredSlot] || slotMap['全天']
+
+      console.log(`🕐 Selecting time slot: ${preferredSlot}`)
+      const slotClicked = await page.evaluate((keywords) => {
+        for (const kw of keywords) {
+          for (const el of document.querySelectorAll('*')) {
+            if ((el.textContent || '').trim() === kw && el.offsetParent !== null) {
+              el.click(); return kw
+            }
+          }
+        }
+        return null
+      }, slotKeywords)
+      console.log(`🕐 Time slot clicked: ${slotClicked}`)
+      await page.waitForTimeout(1000)
+
+      // 2d. 点"确认"关闭时间段弹窗
+      const timeConfirmed = await page.evaluate(() => {
+        for (const el of document.querySelectorAll('*')) {
+          const text = (el.textContent || '').trim()
+          if (text === '确认' && el.offsetParent !== null) { el.click(); return true }
+        }
+        return false
+      })
+      console.log(`✅ Time confirm clicked: ${timeConfirmed}`)
+      await page.waitForTimeout(1000)
     }
 
     // ── 3. 填写联系方式 ────────────────────────────────────
@@ -178,7 +204,7 @@ async function fillForm(bookingUrl, persons, dateText, contact, timeSlot) {
     })
     await page.waitForTimeout(500)
 
-    // ── 5. 点击"去付款" ────────────────────────────────────
+    // ── 5. 点击"去付款/去下单" ──────────────────────────────
     console.log('💳 Clicking submit...')
     const submitted = await page.evaluate(() => {
       const btn = document.querySelector('.sub-right')
@@ -195,26 +221,33 @@ async function fillForm(bookingUrl, persons, dateText, contact, timeSlot) {
     if (submitted) {
       console.log('✅ Form submitted')
       await page.waitForTimeout(3000)
-      process.exit(0)
+      return { success: true }
     } else {
-      console.warn('⚠️  Submit button not found')
-      process.exit(2)
+      return { success: false, step: 'submit', message: '未找到提交按钮（去付款/去下单）' }
     }
 
   } catch (err) {
     console.error(`❌ Error: ${err.message}`)
-    if (browser) await browser.close()
-    process.exit(1)
+    if (browser) await browser.close().catch(() => {})
+    return { success: false, step: 'exception', message: err.message }
   }
 }
 
+// 命令行入口：处理退出码
 if (require.main === module) {
   const [,, bookingUrl, persons, dateText, contact, timeSlot] = process.argv
   if (!bookingUrl || !dateText) {
     console.error('❌ Usage: node fill-form.js <booking_url> <persons> <dateText> [contact] [timeSlot]')
     process.exit(1)
   }
-  fillForm(bookingUrl, parseInt(persons) || 1, dateText, contact || '', timeSlot || '')
+  fillForm(bookingUrl, parseInt(persons) || 1, dateText, contact || '', timeSlot || '').then(res => {
+    if (res.success) {
+      process.exit(0)
+    } else {
+      console.error(`❌ [${res.step}] ${res.message}`)
+      process.exit(res.step === 'exception' ? 1 : 2)
+    }
+  })
 }
 
 module.exports = { fillForm }

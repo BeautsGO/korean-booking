@@ -144,15 +144,20 @@ function parseFormInput(query) {
 }
 
 /**
- * 包装 fillForm 脚本，返回 { success, message } 结构
+ * 包装 fillForm 脚本，返回 { success, step, message } 结构
  */
 async function fillBookingForm(url, bookingUrl, formData) {
   try {
     const targetUrl = bookingUrl || url
-    await fillForm(targetUrl, formData.persons, formData.dateText, formData.contact || '', formData.timeSlot || '全天')
-    return { success: true, message: '预约已提交' }
+    const result = await fillForm(targetUrl, formData.persons, formData.dateText, formData.contact || '', formData.timeSlot || '全天')
+    // fillForm 现在返回 { success, step?, message? }，不再用 process.exit
+    if (result && result.success) {
+      return { success: true, message: '预约已提交' }
+    } else {
+      return { success: false, step: result?.step, message: result?.message || '填写失败' }
+    }
   } catch (err) {
-    return { success: false, message: err.message }
+    return { success: false, step: 'exception', message: err.message }
   }
 }
 
@@ -357,15 +362,16 @@ module.exports = async function (input) {
 
 还有什么需要帮忙吗？`
       } else {
-        return `⚠️ 自动填写遇到问题：${result.message}
+        // 根据失败步骤给出针对性提示
+        const stepHints = {
+          date_click: `❌ 日期选择失败：${result.message}\n\n该日期可能不在可预约范围内，请换一个日期再试，或在已打开的浏览器中手动选择。`,
+          date_next:  `❌ 日历操作失败：找不到"下一步"按钮，请在已打开的浏览器中手动完成。`,
+          submit:     `❌ 提交失败：找不到提交按钮，请在已打开的浏览器中手动点击"去下单"。`,
+        }
+        const hint = stepHints[result.step] || `⚠️ 自动填写遇到问题：${result.message}`
+        return `${hint}
 
-你可以在已打开的浏览器中手动完成填写：
-1. 选择预约人数
-2. 选择预约时间（${formData.dateText}）
-3. 填写联系方式
-4. 点击"去付款"提交
-
-如需其他帮助，随时告诉我！`
+如需重试，请告诉我新的预约日期，我会再帮你操作。`
       }
     }
 
