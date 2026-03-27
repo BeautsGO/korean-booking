@@ -3,12 +3,13 @@
  * fill-form.js — 打开预约表单页并自动填写提交
  *
  * 用法：
- *   node api/browser/fill-form.js <booking_url> <persons> <dateText> [contact]
+ *   node api/browser/fill-form.js <booking_url> <persons> <dateText> [contact] [timeSlot]
  *
  *   booking_url — 预约表单页 URL
  *   persons     — 预约人数（数字）
  *   dateText    — 预约日期文本，例如 "3月26日"
  *   contact     — 联系方式（可选）
+ *   timeSlot    — 时间段：全天/上午/下午（可选，默认全天）
  *
  * 退出码：
  *   0 — 提交成功
@@ -18,7 +19,7 @@
 
 const { createAuthorizedPage } = require('./consult')
 
-async function fillForm(bookingUrl, persons, dateText, contact) {
+async function fillForm(bookingUrl, persons, dateText, contact, timeSlot) {
   let browser
   try {
     const result = await createAuthorizedPage(bookingUrl)
@@ -111,6 +112,39 @@ async function fillForm(bookingUrl, persons, dateText, contact) {
         })
         console.log(`⏭️  Next button clicked: ${nextClicked}`)
         await page.waitForTimeout(1500)
+
+        // ── 2b. 选择时间段（全天/上午/下午）────────────────────
+        // 点完"下一步"后会出现时间段弹窗（全天 / 上午 / 下午）
+        const slotMap = { '上午': ['上午', 'AM', 'morning'], '下午': ['下午', 'PM', 'afternoon'], '全天': ['全天', '不限', 'all day'] }
+        // 默认选"全天"，用户可指定
+        const preferredSlot = timeSlot || '全天'
+        const slotKeywords = slotMap[preferredSlot] || slotMap['全天']
+
+        console.log(`🕐 Selecting time slot: ${preferredSlot}`)
+        const slotClicked = await page.evaluate((keywords) => {
+          // 在可见的弹窗/列表中查找时间段文本
+          for (const kw of keywords) {
+            for (const el of document.querySelectorAll('*')) {
+              if ((el.textContent || '').trim() === kw && el.offsetParent !== null) {
+                el.click(); return kw
+              }
+            }
+          }
+          return null
+        }, slotKeywords)
+        console.log(`🕐 Time slot clicked: ${slotClicked}`)
+        await page.waitForTimeout(1000)
+
+        // 点"确认"按钮关闭时间段弹窗
+        const confirmClicked = await page.evaluate(() => {
+          for (const el of document.querySelectorAll('*')) {
+            const text = (el.textContent || '').trim()
+            if (text === '确认' && el.offsetParent !== null) { el.click(); return true }
+          }
+          return false
+        })
+        console.log(`✅ Time confirm clicked: ${confirmClicked}`)
+        await page.waitForTimeout(1000)
       }
     }
 
@@ -175,12 +209,12 @@ async function fillForm(bookingUrl, persons, dateText, contact) {
 }
 
 if (require.main === module) {
-  const [,, bookingUrl, persons, dateText, contact] = process.argv
+  const [,, bookingUrl, persons, dateText, contact, timeSlot] = process.argv
   if (!bookingUrl || !dateText) {
-    console.error('❌ Usage: node fill-form.js <booking_url> <persons> <dateText> [contact]')
+    console.error('❌ Usage: node fill-form.js <booking_url> <persons> <dateText> [contact] [timeSlot]')
     process.exit(1)
   }
-  fillForm(bookingUrl, parseInt(persons) || 1, dateText, contact || '')
+  fillForm(bookingUrl, parseInt(persons) || 1, dateText, contact || '', timeSlot || '')
 }
 
 module.exports = { fillForm }

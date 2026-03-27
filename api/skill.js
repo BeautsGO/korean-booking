@@ -135,7 +135,12 @@ function parseFormInput(query) {
     if (contact.length < 2) contact = ''
   }
 
-  return { persons, dateText, contact }
+  // 时间段：上午 / 下午 / 全天（默认全天）
+  let timeSlot = '全天'
+  if (query.includes('上午') || query.match(/AM|morning/i)) timeSlot = '上午'
+  else if (query.includes('下午') || query.match(/PM|afternoon/i)) timeSlot = '下午'
+
+  return { persons, dateText, contact, timeSlot }
 }
 
 /**
@@ -144,7 +149,7 @@ function parseFormInput(query) {
 async function fillBookingForm(url, bookingUrl, formData) {
   try {
     const targetUrl = bookingUrl || url
-    await fillForm(targetUrl, formData.persons, formData.dateText, formData.contact || '')
+    await fillForm(targetUrl, formData.persons, formData.dateText, formData.contact || '', formData.timeSlot || '全天')
     return { success: true, message: '预约已提交' }
   } catch (err) {
     return { success: false, message: err.message }
@@ -309,9 +314,10 @@ module.exports = async function (input) {
 
 1. **预约人数**（例如：1人、2人）
 2. **预约时间**（例如：3月26日）
-3. **联系方式**（手机号或微信号）
+3. **时间段**（上午 / 下午 / 全天，默认全天）
+4. **联系方式**（手机号或微信号）
 
-👉 直接回复，例如："**2人，3月26日，13800138000**"`
+👉 直接回复，例如："**2人，3月26日下午，13800138000**"`
     }
 
     // ——————————————————————————————————————————
@@ -345,7 +351,7 @@ module.exports = async function (input) {
 📋 **预约信息摘要：**
 • 🏥 机构：${hospital.name}
 • 👥 人数：${formData.persons} 人
-• 📅 时间：${formData.dateText}${formData.contact ? `\n• 📞 联系方式：${formData.contact}` : ''}
+• 📅 时间：${formData.dateText}${formData.timeSlot && formData.timeSlot !== '全天' ? ' ' + formData.timeSlot : ''}${formData.contact ? `\n• 📞 联系方式：${formData.contact}` : ''}
 
 🎉 提交成功！BeautsGO 平台会尽快联系机构为你匹配时间，确认短信将发送到你的账号绑定手机。
 
