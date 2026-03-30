@@ -15,7 +15,7 @@ const { fillForm } = require('./browser/fill-form')
  *
  * @param {string} query 用户输入
  * @param {string[]} hospitalNames 所有医院名（用于检测输入是否含有医院名）
- * @returns {string} 意图类型：'view' | 'open' | 'book' | 'consult'
+ * @returns {string} 意图类型：'view' | 'open' | 'book' | 'consult' | 'price'
  */
 function detectIntent(query, hospitalNames = []) {
   const q = query.trim()
@@ -34,6 +34,13 @@ function detectIntent(query, hospitalNames = []) {
   const isConsultIntent = /^(咨询客服|联系客服|咨询一下|帮我咨询)$/.test(q.trim()) ||
     (!containsHospitalName && (qLower.includes('咨询客服') || qLower.includes('联系客服')))
 
+  // ——— price：查看价格表（含医院名也允许触发）———
+  const isPriceIntent =
+    qLower.includes('价格') || qLower.includes('价钱') || qLower.includes('收费') ||
+    qLower.includes('多少钱') || qLower.includes('费用') || qLower.includes('报价') ||
+    qLower.includes('价格表') || qLower.includes('price') || qLower.includes('cost') ||
+    /^(查价格|看价格|打开价格|价格页面)$/.test(q.trim())
+
   // ——— fill_form：用户提供预约信息（人数 + 时间 / 继续填写 / 提交）———
   // 识别策略：输入包含数字人数、日期词、"继续填写"、"填写信息"等关键词
   const isFillFormIntent =
@@ -46,6 +53,7 @@ function detectIntent(query, hospitalNames = []) {
     false
 
   if (isFillFormIntent) return 'fill_form'
+  if (isPriceIntent) return 'price'
   if (isConsultIntent) return 'consult'
   if (isBookIntent) return 'book'
   if (isOpenIntent) return 'open'
@@ -76,6 +84,28 @@ function getChatUrl(hospital) {
     // url 解析失败时兜底：直接拼
     const base = hospital.url.split('?')[0].replace(/\/$/, '')
     return `${base}-chat`
+  }
+}
+
+/**
+ * 从 hospital.url 推导价格表页 URL
+ *
+ * URL 规则：
+ *   详情页：https://i.beautsgo.com/cn/hospital/<slug>?from=skill
+ *   价格页：https://i.beautsgo.com/cn/hospital/<slug>-price
+ *
+ * 优先使用 hospital.price_url（如果有），否则自动推导
+ */
+function getPriceUrl(hospital) {
+  if (hospital.price_url) return hospital.price_url
+
+  try {
+    const parsed = new URL(hospital.url)
+    const slug = parsed.pathname.replace(/^\/cn\/hospital\//, '').replace(/\/$/, '')
+    return `https://i.beautsgo.com/cn/hospital/${slug}-price`
+  } catch (e) {
+    const base = hospital.url.split('?')[0].replace(/\/$/, '')
+    return `${base}-price`
   }
 }
 
@@ -144,21 +174,23 @@ function parseFormInput(query) {
 }
 
 /**
- * 包装 fillForm 脚本，返回 { success, step, message } 结构
+ * 通过浏览器自动化填写并提交预约表单
  */
-async function fillBookingForm(url, bookingUrl, formData) {
-  try {
-    const targetUrl = bookingUrl || url
-    const result = await fillForm(targetUrl, formData.persons, formData.dateText, formData.contact || '', formData.timeSlot || '全天')
-    // fillForm 现在返回 { success, step?, message? }，不再用 process.exit
-    if (result && result.success) {
-      return { success: true, message: '预约已提交' }
-    } else {
-      return { success: false, step: result?.step, message: result?.message || '填写失败' }
-    }
-  } catch (err) {
-    return { success: false, step: 'exception', message: err.message }
+async function fillBookingForm(hospital, formData) {
+  if (!hospital.booking_url && !hospital.url) {
+    return { success: false, step: 'no_url', message: `医院"${hospital.name}"缺少预约页面地址` }
   }
+
+  // 优先用 booking_url，否则从 url 拼出预约表单地址
+  const bookingUrl = hospital.booking_url || hospital.url
+
+  return fillForm(
+    bookingUrl,
+    formData.persons,
+    formData.dateText,
+    formData.contact || '',
+    formData.timeSlot || '全天'
+  )
 }
 
 /**
@@ -258,6 +290,9 @@ module.exports = async function (input) {
 📖 **打开医院页面**
 说"打开链接" → 我帮你打开 ${hospital ? hospital.name : '医院'} 的页面
 
+💰 **查看价格表**
+说"查价格" → 我帮你打开 ${hospital ? hospital.name : '医院'} 的价格表页面
+
 ⚡ **自动预约**
 说"帮我预约" → 我帮你自动点击【预约面诊】按钮，跳转到预约表单
 
@@ -310,12 +345,9 @@ module.exports = async function (input) {
         return '❌ 我还不知道你要预约哪家医院，请告诉我医院名称，例如"帮我预约JD皮肤科"。'
       }
 
-      const bookingUrl = hospital.booking_url || hospital.url
-      await openUrl(bookingUrl).catch(() => {})
+      return `好的，帮你预约 **${hospital.name}** 🏥
 
-      return `✅ 预约表单已打开！
-
-📝 请告诉我以下预约信息，我来帮你自动填写并提交：
+📝 请告诉我以下信息，我来帮你提交预约：
 
 1. **预约人数**（例如：1人、2人）
 2. **预约时间**（例如：3月26日）
@@ -348,7 +380,7 @@ module.exports = async function (input) {
 • 联系方式（手机号或微信号）`
       }
 
-      const result = await fillBookingForm(hospital.url, hospital.booking_url, formData)
+      const result = await fillBookingForm(hospital, formData)
 
       if (result.success) {
         return `✅ **预约已提交！**
@@ -362,21 +394,54 @@ module.exports = async function (input) {
 
 还有什么需要帮忙吗？`
       } else {
-        // 根据失败步骤给出针对性提示
-        const stepHints = {
-          date_click: `❌ 日期选择失败：${result.message}\n\n该日期可能不在可预约范围内，请换一个日期再试，或在已打开的浏览器中手动选择。`,
-          date_next:  `❌ 日历操作失败：找不到"下一步"按钮，请在已打开的浏览器中手动完成。`,
-          submit:     `❌ 提交失败：找不到提交按钮，请在已打开的浏览器中手动点击"去下单"。`,
-        }
-        const hint = stepHints[result.step] || `⚠️ 自动填写遇到问题：${result.message}`
+        const hint = result.step === 'no_id'
+          ? `❌ 该医院暂不支持在线预约：${result.message}`
+          : `❌ 预约提交失败：${result.message}`
         return `${hint}
 
-如需重试，请告诉我新的预约日期，我会再帮你操作。`
+你可以通过以下方式手动预约：
+• 打开 BeautsGO App，搜索"${hospital.name}"
+• 或告诉我，我帮你打开医院页面
+
+如需重试，请告诉我新的预约信息。`
       }
     }
 
     // ——————————————————————————————————————————
-    // 第4轮：咨询客服 → 直接打开咨询页
+    // 价格：打开价格表页面
+    // ——————————————————————————————————————————
+    if (intent === 'price') {
+      const hospital = resolveHospital()
+
+      if (!hospital) {
+        return '❌ 我还不知道你要查询哪家医院的价格，请告诉我医院名称，例如"JD皮肤科价格"。'
+      }
+
+      const priceUrl = getPriceUrl(hospital)
+      const opened = await openUrl(priceUrl).then(() => true).catch(() => false)
+
+      if (opened) {
+        return `✅ 已为你打开 **${hospital.name}** 的价格表页面！
+
+价格页面：${priceUrl}
+
+页面上你可以看到：
+• 💰 各项目收费标准
+• 🎁 当前优惠套餐
+• 📋 项目详情说明
+
+还需要预约或在线咨询吗？`
+      } else {
+        return `⚠️ 自动打开价格页面失败，请手动访问：
+
+${priceUrl}
+
+还需要其他帮助吗？`
+      }
+    }
+
+    // ——————————————————————————————————————————
+    // 咨询客服 → 直接打开咨询页
     // ——————————————————————————————————————————
     if (intent === 'consult') {
       const hospital = resolveHospital()
