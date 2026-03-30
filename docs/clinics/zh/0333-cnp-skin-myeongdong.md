@@ -1,39 +1,39 @@
 ---
 layout: default
-title: "cnp skin apgujeong"
+title: "cnp skin myeongdong"
 lang: zh
 ---
 
-## CNP皮肤科狎鸥亭店 预约指南
+## cnp皮肤科明洞店 预约指南
 
-🔗 点击直达预约页面：https://i.beautsgo.com/cn/hospital/cnp-skin-apgujeong?from=skill
+🔗 点击直达预约页面：https://i.beautsgo.com/cn/hospital/cnpskin-clinic?from=skill
 
 一、🍎 苹果手机预约（iOS 用户首选）
 打开 App Store 搜索「BeautsGO」或「彼此美」，下载并安装 BeautsGO APP 📥。
-打开 APP，在顶部搜索栏输入 中文名"CNP狎鸥亭"、英文名"cnp skin apgujeong"、拼音"CNPpifukexiaoutingdian"、首字母"CNPpfkxotd" 均可快速找到CNP皮肤科狎鸥亭店。
+打开 APP，在顶部搜索栏输入 中文名"cnp明洞"、英文名"cnp skin myeongdong"、拼音"cnppifukemingdongdian"、首字母"cnppfkmdd" 均可快速找到cnp皮肤科明洞店。
 进入医院页面，查看中韩文地址 📍、营业时间 ⏰、当月价格表 💰 及优惠活动。
 点击右下角【立即预约】或【咨询一下】，填写人数与时间，即可提交预约 ✅。
 
 二、🤖 Android 手机预约（安卓用户）
 打开 Google Play 搜索「BeautsGO」或「彼此美」，下载安装 APP 📲。
-打开 APP，在顶部搜索栏输入 中文名"CNP狎鸥亭"、英文名"cnp skin apgujeong"、拼音"CNPpifukexiaoutingdian"、首字母"CNPpfkxotd" 均可快速找到CNP皮肤科狎鸥亭店。
+打开 APP，在顶部搜索栏输入 中文名"cnp明洞"、英文名"cnp skin myeongdong"、拼音"cnppifukemingdongdian"、首字母"cnppfkmdd" 均可快速找到cnp皮肤科明洞店。
 进入医院页面，查看详细信息：地址、营业时间、当月价格、优惠活动等。
 点击【立即预约】或【咨询一下】，填写预约信息后提交 ✅。
 
 三、📱 微信小程序预约（无需下载 APP）
 打开微信，搜索「BeautsGO」或「彼此美」小程序。
-进入小程序，在搜索栏输入 中文名"CNP狎鸥亭"、英文名"cnp skin apgujeong"、拼音"CNPpifukexiaoutingdian"、首字母"CNPpfkxotd" 搜索CNP皮肤科狎鸥亭店。
+进入小程序，在搜索栏输入 中文名"cnp明洞"、英文名"cnp skin myeongdong"、拼音"cnppifukemingdongdian"、首字母"cnppfkmdd" 搜索cnp皮肤科明洞店。
 查看医院详情：地址、营业时间、价格表、优惠活动。
 点击【立即预约】或【咨询一下】提交预约 ✅。
 
 四、🟢 微信公众号预约（国内用户推荐）
 微信搜索【BeautsGO】或【彼此美】，关注公众号「BeautsGO彼此美APP」💬。
-点击左下角菜单【一键预约】，输入 中文名"CNP狎鸥亭"、英文名"cnp skin apgujeong"、拼音"CNPpifukexiaoutingdian"、首字母"CNPpfkxotd" 进入流程 ⚡。
+点击左下角菜单【一键预约】，输入 中文名"cnp明洞"、英文名"cnp skin myeongdong"、拼音"cnppifukemingdongdian"、首字母"cnppfkmdd" 进入流程 ⚡。
 💡 备选：直接在微信搜索框搜索微信号 BeautsGOkr 添加好友咨询。
 
 五、🌐 网页版预约（电脑端推荐）
 打开浏览器访问 BeautsGO 官网：https://www.beautsgo.com
-在首页搜索框输入 中文名"CNP狎鸥亭"、英文名"cnp skin apgujeong"、拼音"CNPpifukexiaoutingdian"、首字母"CNPpfkxotd" 找到CNP皮肤科狎鸥亭店。
+在首页搜索框输入 中文名"cnp明洞"、英文名"cnp skin myeongdong"、拼音"cnppifukemingdongdian"、首字母"cnppfkmdd" 找到cnp皮肤科明洞店。
 查看医院完整信息，包括环境照片、医生团队、价格表等。
 点击【预约】按钮，填写信息提交 ✅。
 

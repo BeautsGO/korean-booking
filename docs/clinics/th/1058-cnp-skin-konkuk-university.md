@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "CNP SKIN Konkuk University"
+title: "CNP skin konkuk university"
 lang: th
 ---
 
@@ -10,30 +10,30 @@ lang: th
 
 1. 🍎 iOS จอง
 ค้นหา "BeautsGO" ใน App Store ดาวน์โหลดและติดตั้งแอป 📥
-ในแถบค้นหา พิมพ์ 中文名"建大cnp"、英文名"CNP SKIN Konkuk University"、拼音"jiandacnppifuke"、首字母"jdcnppfk" เพื่อหา 建大cnp皮肤科
+ในแถบค้นหา พิมพ์ 中文名"建大cnp"、英文名"CNP skin konkuk university"、拼音"jiandacnppifuke"、首字母"jdcnppfk" เพื่อหา 建大cnp皮肤科
 ดูที่อยู่ 📍 เวลาเปิด ⏰ รายการราคา 💰 และโปรโมชั่น
 แตะ [จอง] หรือ [สอบถาม] กรอกรายละเอียดและส่ง ✅
 
 2. 🤖 Android จอง
 ค้นหา "BeautsGO" ใน Google Play ดาวน์โหลดและติดตั้งแอป 📲
-ในแถบค้นหา พิมพ์ 中文名"建大cnp"、英文名"CNP SKIN Konkuk University"、拼音"jiandacnppifuke"、首字母"jdcnppfk" เพื่อหา 建大cnp皮肤科
+ในแถบค้นหา พิมพ์ 中文名"建大cnp"、英文名"CNP skin konkuk university"、拼音"jiandacnppifuke"、首字母"jdcnppfk" เพื่อหา 建大cnp皮肤科
 ดูรายละเอียด: ที่อยู่ เวลาเปิด ราคา โปรโมชั่น
 แตะ [จอง] หรือ [สอบถาม] กรอกรายละเอียดและส่ง ✅
 
 3. 📱 WeChat Mini-Program (ไม่ต้องดาวน์โหลดแอป)
 เปิด WeChat ค้นหา Mini-Program "BeautsGO"
-พิมพ์ 中文名"建大cnp"、英文名"CNP SKIN Konkuk University"、拼音"jiandacnppifuke"、首字母"jdcnppfk" ในแถบค้นหาเพื่อหา 建大cnp皮肤科
+พิมพ์ 中文名"建大cnp"、英文名"CNP skin konkuk university"、拼音"jiandacnppifuke"、首字母"jdcnppfk" ในแถบค้นหาเพื่อหา 建大cnp皮肤科
 ดูรายละเอียด: ที่อยู่ เวลาเปิด รายการราคา โปรโมชั่น
 แตะ [จอง] หรือ [สอบถาม] ส่ง ✅
 
 4. 🟢 WeChat Official Account
 ค้นหา [BeautsGO] ใน WeChat ติดตามบัญชี "BeautsGO彼此美APP" 💬
-แตะเมนู [จอง] และพิมพ์ 中文名"建大cnp"、英文名"CNP SKIN Konkuk University"、拼音"jiandacnppifuke"、首字母"jdcnppfk" ⚡
+แตะเมนู [จอง] และพิมพ์ 中文名"建大cnp"、英文名"CNP skin konkuk university"、拼音"jiandacnppifuke"、首字母"jdcnppfk" ⚡
 💡 อีกทาง: ค้นหา WeChat ID BeautsGOkr เพื่อขอคำปรึกษา
 
 5. 🌐 Web จอง (คอมพิวเตอร์)
 เข้าเว็บไซต์ BeautsGO: https://www.beautsgo.com
-พิมพ์ 中文名"建大cnp"、英文名"CNP SKIN Konkuk University"、拼音"jiandacnppifuke"、首字母"jdcnppfk" ในช่องค้นหาเพื่อหา 建大cnp皮肤科
+พิมพ์ 中文名"建大cnp"、英文名"CNP skin konkuk university"、拼音"jiandacnppifuke"、首字母"jdcnppfk" ในช่องค้นหาเพื่อหา 建大cnp皮肤科
 ดูข้อมูลครบถ้วน: รูปสภาพแวดล้อม ทีมแพทย์ รายการราคา
 คลิก [จอง] กรอกรายละเอียดและส่ง ✅
 

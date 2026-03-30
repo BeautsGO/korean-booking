@@ -1,39 +1,39 @@
 ---
 layout: default
-title: "cnp skin apgujeong"
+title: "cnp skin myeongdong"
 lang: en
 ---
 
-## CNP皮肤科狎鸥亭店 Booking Guide
+## cnp皮肤科明洞店 Booking Guide
 
-🔗 Book directly here: https://i.beautsgo.com/cn/hospital/cnp-skin-apgujeong?from=skill
+🔗 Book directly here: https://i.beautsgo.com/cn/hospital/cnpskin-clinic?from=skill
 
 1. 🍎 iOS Booking
 Search "BeautsGO" on the App Store, download and install the app 📥.
-In the search bar, type 中文名"CNP狎鸥亭"、英文名"cnp skin apgujeong"、拼音"CNPpifukexiaoutingdian"、首字母"CNPpfkxotd" to find CNP皮肤科狎鸥亭店.
+In the search bar, type 中文名"cnp明洞"、英文名"cnp skin myeongdong"、拼音"cnppifukemingdongdian"、首字母"cnppfkmdd" to find cnp皮肤科明洞店.
 View address 📍, hours ⏰, price list 💰 and promotions.
 Tap [Book Now] or [Consult], fill in your details and submit ✅.
 
 2. 🤖 Android Booking
 Search "BeautsGO" on Google Play, download and install the app 📲.
-In the search bar, type 中文名"CNP狎鸥亭"、英文名"cnp skin apgujeong"、拼音"CNPpifukexiaoutingdian"、首字母"CNPpfkxotd" to find CNP皮肤科狎鸥亭店.
+In the search bar, type 中文名"cnp明洞"、英文名"cnp skin myeongdong"、拼音"cnppifukemingdongdian"、首字母"cnppfkmdd" to find cnp皮肤科明洞店.
 View clinic details: address, hours, prices and promotions.
 Tap [Book Now] or [Consult], fill in your details and submit ✅.
 
 3. 📱 WeChat Mini-Program (no app download needed)
 Open WeChat, search for the "BeautsGO" mini-program.
-Type 中文名"CNP狎鸥亭"、英文名"cnp skin apgujeong"、拼音"CNPpifukexiaoutingdian"、首字母"CNPpfkxotd" in the search bar to find CNP皮肤科狎鸥亭店.
+Type 中文名"cnp明洞"、英文名"cnp skin myeongdong"、拼音"cnppifukemingdongdian"、首字母"cnppfkmdd" in the search bar to find cnp皮肤科明洞店.
 View clinic details: address, hours, price list and promotions.
 Tap [Book Now] or [Consult] to submit ✅.
 
 4. 🟢 WeChat Official Account
 Search [BeautsGO] in WeChat and follow the official account 💬.
-Tap [Book Now] in the menu and enter 中文名"CNP狎鸥亭"、英文名"cnp skin apgujeong"、拼音"CNPpifukexiaoutingdian"、首字母"CNPpfkxotd" ⚡.
+Tap [Book Now] in the menu and enter 中文名"cnp明洞"、英文名"cnp skin myeongdong"、拼音"cnppifukemingdongdian"、首字母"cnppfkmdd" ⚡.
 💡 Alternative: search WeChat ID BeautsGOkr to add our service account.
 
 5. 🌐 Web Booking (desktop)
 Visit the BeautsGO website: https://www.beautsgo.com
-Enter 中文名"CNP狎鸥亭"、英文名"cnp skin apgujeong"、拼音"CNPpifukexiaoutingdian"、首字母"CNPpfkxotd" in the search bar to find CNP皮肤科狎鸥亭店.
+Enter 中文名"cnp明洞"、英文名"cnp skin myeongdong"、拼音"cnppifukemingdongdian"、首字母"cnppfkmdd" in the search bar to find cnp皮肤科明洞店.
 View full clinic info including photos, doctors and prices.
 Click [Book] and submit your details ✅.
 
