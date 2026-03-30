@@ -6,7 +6,7 @@ lang: th
 
 ## cnp道谷良才店 คู่มือการจอง
 
-🔗 จองโดยตรงที่นี่: https://i.beautsgo.com/cn/hospital/cnp-skin-dogok-yangjae?from=skill
+🔗 จองโดยตรงที่นี่: https://i.beautsgo.com/cn/hospital/cnp-skin-dogokyangjae?from=skill
 
 1. 🍎 iOS จอง
 ค้นหา "BeautsGO" ใน App Store ดาวน์โหลดและติดตั้งแอป 📥

@@ -6,7 +6,7 @@ lang: ja
 
 ## cnp道谷良才店 予約ガイド
 
-🔗 こちらから直接予約：https://i.beautsgo.com/cn/hospital/cnp-skin-dogok-yangjae?from=skill
+🔗 こちらから直接予約：https://i.beautsgo.com/cn/hospital/cnp-skin-dogokyangjae?from=skill
 
 1. 🍎 iPhone（iOS）予約
 App Storeで「BeautsGO」または「彼此美」を検索し、アプリをダウンロードしてインストールしてください 📥。

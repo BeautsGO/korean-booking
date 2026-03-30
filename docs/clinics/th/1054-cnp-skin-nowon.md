@@ -6,7 +6,7 @@ lang: th
 
 ## cnp皮肤科蘆原店 คู่มือการจอง
 
-🔗 จองโดยตรงที่นี่: https://i.beautsgo.com/cn/hospital/cnp-nowon?from=skill
+🔗 จองโดยตรงที่นี่: https://i.beautsgo.com/cn/hospital/cnp-skin-nowon?from=skill
 
 1. 🍎 iOS จอง
 ค้นหา "BeautsGO" ใน App Store ดาวน์โหลดและติดตั้งแอป 📥

@@ -6,7 +6,7 @@ lang: th
 
 ## cnp皮肤科明洞店 คู่มือการจอง
 
-🔗 จองโดยตรงที่นี่: https://i.beautsgo.com/cn/hospital/cnpskin-clinic?from=skill
+🔗 จองโดยตรงที่นี่: https://i.beautsgo.com/cn/hospital/cnp-skin-myeongdong?from=skill
 
 1. 🍎 iOS จอง
 ค้นหา "BeautsGO" ใน App Store ดาวน์โหลดและติดตั้งแอป 📥

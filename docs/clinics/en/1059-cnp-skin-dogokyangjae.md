@@ -6,7 +6,7 @@ lang: en
 
 ## cnp道谷良才店 Booking Guide
 
-🔗 Book directly here: https://i.beautsgo.com/cn/hospital/cnp-skin-dogok-yangjae?from=skill
+🔗 Book directly here: https://i.beautsgo.com/cn/hospital/cnp-skin-dogokyangjae?from=skill
 
 1. 🍎 iOS Booking
 Search "BeautsGO" on the App Store, download and install the app 📥.
