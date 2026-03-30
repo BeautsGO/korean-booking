@@ -3,7 +3,8 @@ const hospitals = require('../data/hospitals.json')
 const { matchHospital } = require('../core/resolver')
 const { extractHospitalKeyword } = require('../core/preprocessor')
 const { openUrl } = require('./browser/open-url')
-const { fillForm } = require('./browser/fill-form')
+const https = require('https')
+const http = require('http')
 
 /**
  * 识别用户意图
@@ -174,23 +175,67 @@ function parseFormInput(query) {
 }
 
 /**
- * 通过浏览器自动化填写并提交预约表单
+ * 将日期文本解析为 YYYY-MM-DD 格式
+ * 输入如："3月26日"、"4月5号"、"2026-04-05"
  */
-async function fillBookingForm(hospital, formData) {
-  if (!hospital.booking_url && !hospital.url) {
-    return { success: false, step: 'no_url', message: `医院"${hospital.name}"缺少预约页面地址` }
+function parseDateToISO(dateText) {
+  // 已是 YYYY-MM-DD
+  const isoMatch = dateText.match(/(\d{4})[年\-\/](\d{1,2})[月\-\/](\d{1,2})/)
+  if (isoMatch) {
+    const y = isoMatch[1]
+    const m = String(isoMatch[2]).padStart(2, '0')
+    const d = String(isoMatch[3]).padStart(2, '0')
+    return `${y}-${m}-${d}`
   }
+  // "3月26日" or "3月26号"
+  const cnMatch = dateText.match(/(\d{1,2})[月\/](\d{1,2})[日号]?/)
+  if (cnMatch) {
+    const year = new Date().getFullYear()
+    const m = String(cnMatch[1]).padStart(2, '0')
+    const d = String(cnMatch[2]).padStart(2, '0')
+    return `${year}-${m}-${d}`
+  }
+  return dateText
+}
 
-  // 优先用 booking_url，否则从 url 拼出预约表单地址
-  const bookingUrl = hospital.booking_url || hospital.url
-
-  return fillForm(
-    bookingUrl,
-    formData.persons,
-    formData.dateText,
-    formData.contact || '',
-    formData.timeSlot || '全天'
-  )
+/**
+ * 通过接口提交预约
+ * POST https://api.yestokr.com/api/Appointment/saveFromSkill
+ */
+function submitBookingApi(payload) {
+  return new Promise((resolve, reject) => {
+    const body = JSON.stringify(payload)
+    const options = {
+      hostname: 'api.yestokr.com',
+      path: '/api/Appointment/saveFromSkill',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(body),
+      },
+    }
+    const req = https.request(options, (res) => {
+      let data = ''
+      res.on('data', chunk => { data += chunk })
+      res.on('end', () => {
+        try {
+          const json = JSON.parse(data)
+          resolve(json)
+        } catch (e) {
+          resolve({ code: -1, msg: `响应解析失败: ${data.slice(0, 200)}` })
+        }
+      })
+    })
+    req.on('error', (e) => {
+      resolve({ code: -1, msg: `请求失败: ${e.message}` })
+    })
+    req.setTimeout(15000, () => {
+      req.destroy()
+      resolve({ code: -1, msg: '请求超时' })
+    })
+    req.write(body)
+    req.end()
+  })
 }
 
 /**
@@ -347,12 +392,12 @@ module.exports = async function (input) {
 
       return `好的，帮你预约 **${hospital.name}** 🏥
 
-📝 请告诉我以下信息，我来帮你提交预约：
+📝 请告诉我以下信息，我直接帮你提交预约：
 
 1. **预约人数**（例如：1人、2人）
 2. **预约时间**（例如：3月26日）
 3. **时间段**（上午 / 下午 / 全天，默认全天）
-4. **联系方式**（手机号或微信号）
+4. **联系方式**（手机号）
 
 👉 直接回复，例如："**2人，3月26日下午，13800138000**"`
     }
@@ -377,31 +422,52 @@ module.exports = async function (input) {
 
 其他信息可选：
 • 预约人数（默认1人）
-• 联系方式（手机号或微信号）`
+• 联系方式（手机号）`
       }
 
-      const result = await fillBookingForm(hospital, formData)
+      if (!hospital.id) {
+        return `❌ 该医院暂不支持在线预约（缺少医院ID），请手动打开 BeautsGO 预约：${hospital.url || ''}`
+      }
 
-      if (result.success) {
+      // 组装接口参数
+      const dateISO = parseDateToISO(formData.dateText)
+      const expectedTime = formData.timeSlot && formData.timeSlot !== '全天'
+        ? `${dateISO} ${formData.timeSlot}`
+        : `${dateISO} 全天`
+
+      const payload = {
+        contact: formData.contact || '',
+        expected_time: expectedTime,
+        project_type: '',
+        d_id: '',
+        h_id: hospital.id,
+        p_id: '',
+        num: formData.persons,
+        source_type: 'skill',
+      }
+
+      console.log(`[Booking Skill] 提交接口参数：`, JSON.stringify(payload))
+      const result = await submitBookingApi(payload)
+      console.log(`[Booking Skill] 接口返回：`, JSON.stringify(result))
+
+      if (result.code === 0) {
         return `✅ **预约已提交！**
 
 📋 **预约信息摘要：**
 • 🏥 机构：${hospital.name}
 • 👥 人数：${formData.persons} 人
-• 📅 时间：${formData.dateText}${formData.timeSlot && formData.timeSlot !== '全天' ? ' ' + formData.timeSlot : ''}${formData.contact ? `\n• 📞 联系方式：${formData.contact}` : ''}
+• 📅 时间：${expectedTime}${formData.contact ? `\n• 📞 联系方式：${formData.contact}` : ''}
 
 🎉 提交成功！BeautsGO 平台会尽快联系机构为你匹配时间，确认短信将发送到你的账号绑定手机。
 
 还有什么需要帮忙吗？`
       } else {
-        const hint = result.step === 'no_id'
-          ? `❌ 该医院暂不支持在线预约：${result.message}`
-          : `❌ 预约提交失败：${result.message}`
-        return `${hint}
+        const errMsg = result.msg || result.message || JSON.stringify(result)
+        return `❌ 预约提交失败：${errMsg}
 
 你可以通过以下方式手动预约：
 • 打开 BeautsGO App，搜索"${hospital.name}"
-• 或告诉我，我帮你打开医院页面
+• 或说"打开链接"，我帮你打开医院页面
 
 如需重试，请告诉我新的预约信息。`
       }
