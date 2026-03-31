@@ -3281,7 +3281,11 @@
     "en_address": "B2, Shinsa Meta Building, 616 Gangnam-daero, Gangnam-gu, Seoul (Sinsa-dong)",
     "ko_kr_address": "서울시 강남구 강남대로 616 , 신사미타워 지하2층 (신사동）",
     "ja_address": "ソウル特別市江南区江南大路616、新沙美塔地下2階（新沙洞）",
-    "th_address": ""
+    "th_address": "",
+    "aliases": [
+      "jd",
+      "JD"
+    ]
   },
   {
     "id": 251,
