@@ -2,7 +2,7 @@
 name: booking-skill
 title: 韩国美容预约指南 Korean Beauty Booking
 entry: api/skill.js
-version: 2.6.6
+version: 2.6.7
 tags:
   - 韩国
   - 美容
