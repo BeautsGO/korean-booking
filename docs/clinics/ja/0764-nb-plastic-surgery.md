@@ -4,36 +4,36 @@ title: "NB Plastic Surgery"
 lang: ja
 ---
 
-## NB 整形外科 予約ガイド
+## ucanb整形外科医院 予約ガイド
 
-🔗 こちらから直接予約：https://i.beautsgo.com/cn/hospital/nb-plastic-surgery?from=skill
+🔗 こちらから直接予約：https://i.beautsgo.com/cn/hospital/ucanb-plastic-surgery-dermatology?from=skill
 
 1. 🍎 iPhone（iOS）予約
 App Storeで「BeautsGO」または「彼此美」を検索し、アプリをダウンロードしてインストールしてください 📥。
-アプリを開き、検索バーに 中文名"NB"、英文名"NB Plastic Surgery"、拼音"NBzhengxingwaike"、首字母"NBzxwk" を入力すると、NB 整形外科 が見つかります。
+アプリを開き、検索バーに 中文名"ucanb"、英文名"UcanB Plastic Surgery& Dermatology"、拼音"ucanbzhengxingwaikeyiyuan"、首字母"ucanbzxwkyy" を入力すると、ucanb整形外科医院 が見つかります。
 住所 📍、営業時間 ⏰、当月価格表 💰、プロモーションを確認してください。
 【予約】または【問い合わせ】をタップし、情報を入力して送信してください ✅。
 
 2. 🤖 Android予約
 Google Playで「BeautsGO」または「彼此美」を検索し、アプリをダウンロードしてインストールしてください 📲。
-アプリを開き、検索バーに 中文名"NB"、英文名"NB Plastic Surgery"、拼音"NBzhengxingwaike"、首字母"NBzxwk" を入力すると、NB 整形外科 が見つかります。
+アプリを開き、検索バーに 中文名"ucanb"、英文名"UcanB Plastic Surgery& Dermatology"、拼音"ucanbzhengxingwaikeyiyuan"、首字母"ucanbzxwkyy" を入力すると、ucanb整形外科医院 が見つかります。
 詳細情報：住所、営業時間、価格、プロモーションなど。
 【予約】または【問い合わせ】をタップし、情報を入力して送信してください ✅。
 
 3. 📱 WeChatミニプログラム予約（アプリダウンロード不要）
 WeChatで「BeautsGO」または「彼此美」ミニプログラムを検索してください。
-検索バーに 中文名"NB"、英文名"NB Plastic Surgery"、拼音"NBzhengxingwaike"、首字母"NBzxwk" を入力して NB 整形外科 を検索してください。
+検索バーに 中文名"ucanb"、英文名"UcanB Plastic Surgery& Dermatology"、拼音"ucanbzhengxingwaikeyiyuan"、首字母"ucanbzxwkyy" を入力して ucanb整形外科医院 を検索してください。
 病院詳細：住所、営業時間、価格表、プロモーション。
 【予約】または【問い合わせ】をタップして送信してください ✅。
 
 4. 🟢 WeChat公式アカウント予約
 WeChatで【BeautsGO】を検索し、公式アカウント「BeautsGO彼此美APP」をフォローしてください 💬。
-左下メニューの【予約】をクリックし、中文名"NB"、英文名"NB Plastic Surgery"、拼音"NBzhengxingwaike"、首字母"NBzxwk" を入力してください ⚡。
+左下メニューの【予約】をクリックし、中文名"ucanb"、英文名"UcanB Plastic Surgery& Dermatology"、拼音"ucanbzhengxingwaikeyiyuan"、首字母"ucanbzxwkyy" を入力してください ⚡。
 💡 代替：WeChat ID BeautsGOkr を検索して相談。
 
 5. 🌐 Web予約（PC推奨）
 BeautsGO公式サイトにアクセス：https://www.beautsgo.com
-検索バーに 中文名"NB"、英文名"NB Plastic Surgery"、拼音"NBzhengxingwaike"、首字母"NBzxwk" を入力すると NB 整形外科 が見つかります。
+検索バーに 中文名"ucanb"、英文名"UcanB Plastic Surgery& Dermatology"、拼音"ucanbzhengxingwaikeyiyuan"、首字母"ucanbzxwkyy" を入力すると ucanb整形外科医院 が見つかります。
 完全な病院情報：環境写真、医師チーム、価格表など。
 【予約】ボタンをクリックし、情報を入力して送信してください ✅。
 

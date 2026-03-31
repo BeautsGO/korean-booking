@@ -4,36 +4,36 @@ title: "on clinic"
 lang: en
 ---
 
-## ON医院(皮肤科） Booking Guide
+## 韩国ICON整形医院 Booking Guide
 
-🔗 Book directly here: https://i.beautsgo.com/cn/hospital/on-clinic?from=skill
+🔗 Book directly here: https://i.beautsgo.com/cn/hospital/icon-plastic-surgery?from=skill
 
 1. 🍎 iOS Booking
 Search "BeautsGO" on the App Store, download and install the app 📥.
-In the search bar, type 中文名"ON"、拼音"ONyiyuanpifuke"、首字母"ONyypfk" to find ON医院(皮肤科）.
+In the search bar, type 中文名"ICON"、英文名"ICON PLASTIC SURGERY"、拼音"hanguoICONzhengxingyiyuan"、首字母"hgICONzxyy" to find 韩国ICON整形医院.
 View address 📍, hours ⏰, price list 💰 and promotions.
 Tap [Book Now] or [Consult], fill in your details and submit ✅.
 
 2. 🤖 Android Booking
 Search "BeautsGO" on Google Play, download and install the app 📲.
-In the search bar, type 中文名"ON"、拼音"ONyiyuanpifuke"、首字母"ONyypfk" to find ON医院(皮肤科）.
+In the search bar, type 中文名"ICON"、英文名"ICON PLASTIC SURGERY"、拼音"hanguoICONzhengxingyiyuan"、首字母"hgICONzxyy" to find 韩国ICON整形医院.
 View clinic details: address, hours, prices and promotions.
 Tap [Book Now] or [Consult], fill in your details and submit ✅.
 
 3. 📱 WeChat Mini-Program (no app download needed)
 Open WeChat, search for the "BeautsGO" mini-program.
-Type 中文名"ON"、拼音"ONyiyuanpifuke"、首字母"ONyypfk" in the search bar to find ON医院(皮肤科）.
+Type 中文名"ICON"、英文名"ICON PLASTIC SURGERY"、拼音"hanguoICONzhengxingyiyuan"、首字母"hgICONzxyy" in the search bar to find 韩国ICON整形医院.
 View clinic details: address, hours, price list and promotions.
 Tap [Book Now] or [Consult] to submit ✅.
 
 4. 🟢 WeChat Official Account
 Search [BeautsGO] in WeChat and follow the official account 💬.
-Tap [Book Now] in the menu and enter 中文名"ON"、拼音"ONyiyuanpifuke"、首字母"ONyypfk" ⚡.
+Tap [Book Now] in the menu and enter 中文名"ICON"、英文名"ICON PLASTIC SURGERY"、拼音"hanguoICONzhengxingyiyuan"、首字母"hgICONzxyy" ⚡.
 💡 Alternative: search WeChat ID BeautsGOkr to add our service account.
 
 5. 🌐 Web Booking (desktop)
 Visit the BeautsGO website: https://www.beautsgo.com
-Enter 中文名"ON"、拼音"ONyiyuanpifuke"、首字母"ONyypfk" in the search bar to find ON医院(皮肤科）.
+Enter 中文名"ICON"、英文名"ICON PLASTIC SURGERY"、拼音"hanguoICONzhengxingyiyuan"、首字母"hgICONzxyy" in the search bar to find 韩国ICON整形医院.
 View full clinic info including photos, doctors and prices.
 Click [Book] and submit your details ✅.
 

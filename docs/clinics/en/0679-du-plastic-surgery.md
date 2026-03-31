@@ -4,36 +4,36 @@ title: "DU Plastic Surgery"
 lang: en
 ---
 
-## DU整形医院 Booking Guide
+## Schedule医院 Booking Guide
 
-🔗 Book directly here: https://i.beautsgo.com/cn/hospital/du-plastic-surgery?from=skill
+🔗 Book directly here: https://i.beautsgo.com/cn/hospital/schedule-clinic?from=skill
 
 1. 🍎 iOS Booking
 Search "BeautsGO" on the App Store, download and install the app 📥.
-In the search bar, type 中文名"DU"、英文名"DU Plastic Surgery"、拼音"DUzhengxingyiyuan"、首字母"DUzxyy" to find DU整形医院.
+In the search bar, type 中文名"Schedule"、拼音"Scheduleyiyuan"、首字母"Scheduleyy" to find Schedule医院.
 View address 📍, hours ⏰, price list 💰 and promotions.
 Tap [Book Now] or [Consult], fill in your details and submit ✅.
 
 2. 🤖 Android Booking
 Search "BeautsGO" on Google Play, download and install the app 📲.
-In the search bar, type 中文名"DU"、英文名"DU Plastic Surgery"、拼音"DUzhengxingyiyuan"、首字母"DUzxyy" to find DU整形医院.
+In the search bar, type 中文名"Schedule"、拼音"Scheduleyiyuan"、首字母"Scheduleyy" to find Schedule医院.
 View clinic details: address, hours, prices and promotions.
 Tap [Book Now] or [Consult], fill in your details and submit ✅.
 
 3. 📱 WeChat Mini-Program (no app download needed)
 Open WeChat, search for the "BeautsGO" mini-program.
-Type 中文名"DU"、英文名"DU Plastic Surgery"、拼音"DUzhengxingyiyuan"、首字母"DUzxyy" in the search bar to find DU整形医院.
+Type 中文名"Schedule"、拼音"Scheduleyiyuan"、首字母"Scheduleyy" in the search bar to find Schedule医院.
 View clinic details: address, hours, price list and promotions.
 Tap [Book Now] or [Consult] to submit ✅.
 
 4. 🟢 WeChat Official Account
 Search [BeautsGO] in WeChat and follow the official account 💬.
-Tap [Book Now] in the menu and enter 中文名"DU"、英文名"DU Plastic Surgery"、拼音"DUzhengxingyiyuan"、首字母"DUzxyy" ⚡.
+Tap [Book Now] in the menu and enter 中文名"Schedule"、拼音"Scheduleyiyuan"、首字母"Scheduleyy" ⚡.
 💡 Alternative: search WeChat ID BeautsGOkr to add our service account.
 
 5. 🌐 Web Booking (desktop)
 Visit the BeautsGO website: https://www.beautsgo.com
-Enter 中文名"DU"、英文名"DU Plastic Surgery"、拼音"DUzhengxingyiyuan"、首字母"DUzxyy" in the search bar to find DU整形医院.
+Enter 中文名"Schedule"、拼音"Scheduleyiyuan"、首字母"Scheduleyy" in the search bar to find Schedule医院.
 View full clinic info including photos, doctors and prices.
 Click [Book] and submit your details ✅.
 
