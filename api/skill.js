@@ -17,7 +17,7 @@ const http = require('http')
  * @param {string} query 用户输入
  * @param {string[]} hospitalNames 所有医院名（用于检测输入是否含有医院名）
  * @param {object} context 跨轮上下文（用于 fill_form 判断）
- * @returns {string} 意图类型：'view' | 'open' | 'book' | 'consult' | 'price'
+ * @returns {string} 意图类型：'view' | 'open' | 'book' | 'consult' | 'price' | 'download'
  */
 function detectIntent(query, hospitalNames = [], context = {}) {
   const q = query.trim()
@@ -39,6 +39,10 @@ function detectIntent(query, hospitalNames = [], context = {}) {
   const isConsultIntent = /^(咨询客服|联系客服|咨询一下|帮我咨询)$/.test(q.trim()) ||
     (!containsHospitalName && (qLower.includes('咨询客服') || qLower.includes('联系客服')))
 
+  // ——— download：下载 APP ———
+  const isDownloadIntent =
+    /下载|download|安装app|装app/i.test(q)
+
   // ——— price：查看价格表（含医院名也允许触发）———
   const isPriceIntent =
     qLower.includes('价格') || qLower.includes('价钱') || qLower.includes('收费') ||
@@ -57,6 +61,7 @@ function detectIntent(query, hospitalNames = [], context = {}) {
     // 包含日期（3月25日 / 25号 / 2026-03-25 等）—— 必须有上下文医院
     (/\d+(月|号|日|\/|-)\d*/.test(q) && !containsHospitalName && hasContextHospital)
 
+  if (isDownloadIntent) return 'download'
   if (isFillFormIntent) return 'fill_form'
   if (isPriceIntent) return 'price'
   if (isConsultIntent) return 'consult'
@@ -460,6 +465,9 @@ ${lines.join('\n')}
 💬 **在线咨询**
 说"咨询客服" → 打开 ${hospital.name} 的在线客服页面
 
+📲 **下载 APP**
+说"帮我下载" → 获取 BeautsGO iOS / Android 下载链接
+
 ---
 你想做哪个？${hospitalHint}`
     }
@@ -587,6 +595,24 @@ ${lines.join('\n')}
 
 如需重试，请告诉我新的预约信息。`
       }
+    }
+
+    // ——————————————————————————————————————————
+    // 下载：返回 BeautsGO APP 下载链接
+    // ——————————————————————————————————————————
+    if (intent === 'download') {
+      return `📲 **BeautsGO APP 下载**
+
+🍎 **iOS（苹果）**
+[App Store 下载](https://apps.apple.com/cn/app/beautsgo%E5%BD%BC%E6%AD%A4%E7%BE%8E-%E9%9F%A9%E5%9B%BD%E7%9A%AE%E8%82%A4%E7%A7%91%E9%A2%84%E7%BA%A6/id6741841509)
+
+🤖 **Android（谷歌商店）**
+[Google Play 下载](https://play.google.com/store/apps/details?id=uni.UNIEF980DB)
+
+📦 **Android（国内直接安装包）**
+[下载 APK](https://img.beautsgo.com/3.6.apk)（适合无法访问 Google Play 的用户）
+
+安装后搜索医院名称即可预约 ✅`
     }
 
     // ——————————————————————————————————————————
